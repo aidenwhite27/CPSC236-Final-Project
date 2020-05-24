@@ -1,0 +1,37 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TennisBall : MonoBehaviour
+{
+
+    public float jumpBoost;
+
+    private PlayerController playerController;
+
+    private AudioSource bark2;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        playerController = FindObjectOfType<PlayerController>();
+
+        bark2 = GameObject.Find("Bark2Sound").GetComponent<AudioSource>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.name == "Player")
+        {
+            playerController.AddJump(jumpBoost);
+            bark2.Play();
+            gameObject.SetActive(false);
+        }
+    }
+}
